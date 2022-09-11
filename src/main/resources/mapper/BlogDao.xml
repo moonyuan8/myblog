@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8" ?>
+    <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sjy.dao.BlogDao">
+<!--    查询编辑修改博客指定博客-->
+   <select id="getBlogById" parameterType="long" resultType="Blog">
+       select b.id,b.flag,b.title,b.content,b.type_id,
+              b.first_picture,b.description,b.recommend,b.published,b.share_statement,
+              b.appreciation,b.commentabled from t_blog b  where  b.id = #{id};
+   </select>
+
+    <resultMap id="blog" type="Blog">
+        <id property="id" column="id"/>
+        <result property="title" column="title"/>
+        <result property="createTime" column="create_time"/>
+        <result property="recommend" column="recommend"/>
+        <result property="published" column="published"/>
+        <result property="typeId" column="type_id"/>
+        <association property="type" javaType="Type">
+            <id property="id" column="id"/>
+            <result property="name" column="name"/>
+        </association>
+    </resultMap>
+    <!--查询文章管理列表-->
+    <select id="listAllBlog" resultMap="blog">
+        select b.id,b.title,b.create_time,b.recommend,b.published,b.type_id,t.id,t.name from t_blog b left outer join
+                t_type t on b.type_id = t.id order by b.create_time desc
+    </select>
+
+    <insert id="saveBlog" parameterType="Blog">
+        insert into t_blog(id, appreciation, commentabled, content, create_time,
+                           description, first_picture, flag, published, recommend,
+                           share_statement, title, update_time, views, type_id, user_id, comment_count)
+        VALUES (#{id}, #{appreciation}, #{commentabled}, #{content}, #{createTime},
+                #{description}, #{firstPicture}, #{flag}, #{published}, #{recommend},
+                #{shareStatement}, #{title}, #{updateTime},
+                #{views}, #{typeId}, #{userId}, #{commentCount});
+    </insert>
+    <update id="updateBlog" parameterType="Blog">
+        update t_blog set published = #{published},flag = #{flag} ,
+                          title = #{title}, content = #{content}, type_id = #{typeId},
+                          first_picture = #{firstPicture} , description = #{description} , recommend = #{recommend} ,
+                          share_statement = #{shareStatement}, appreciation = #{appreciation},
+                          commentabled = #{commentabled} ,update_time = #{updateTime} where id = #{id};
+    </update>
+    <delete id="deleteBlog" parameterType="long">
+        delete  from t_blog where id=#{id};
+    </delete>
+
+    <resultMap id="firstPageBlog" type="FirstPageBlog">
+        <id property="id" column="id"/>
+        <result property="title" column="title"/>
+        <result property="firstPicture" column="first_picture"/>
+        <result property="views" column="views"/>
+        <result property="commentCount" column="comment_count"/>
+        <result property="createTime" column="create_time"/>
+        <result property="description" column="description"/>
+        <result property="typeName" column="name"/>
+        <result property="nickname" column="username"/>
+        <result property="avatar" column="avatar"/>
+    </resultMap>
+    <select id="getFirstPageBlog" resultMap="firstPageBlog">
+        select b.id,b.title,b.first_picture, b.views, b.comment_count,b.create_time,b.description,
+               t.name ,
+               u.username, u.avatar
+        from t_blog b, t_type t,t_user u
+        where b.type_id = t.id and  u.id = b.user_id order by b.create_time desc
+    </select>
+
+    <select id="getAllRecommendBlog" resultType="Blog">
+        select * from t_blog where recommend=true order by views desc limit 3
+    </select>
+
+    <resultMap id="detailedBlog" type="DetailedBlog">
+        <id property="id" column="bid"/>
+        <result property="firstPicture" column="first_picture"/>
+        <result property="flag" column="flag"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="typeName" column="name"/>
+        <result property="views" column="views"/>
+        <result property="commentCount" column="comment_count"/>
+        <result property="createTime" column="create_time"/>
+        <result property="commentabled" column="commentabled"/>
+        <result property="shareStatement" column="share_statement"/>
+        <result property="appreciation" column="appreciation"/>
+        <result property="nickname" column="username"/>
+        <result property="avatar" column="avatar"/>
+    </resultMap>
+
+    <select id="getDetailedBlog" parameterType="long" resultMap="detailedBlog">
+        select b.id bid,b.first_picture,b.flag,b.title,b.content,b.views,b.comment_count,b.create_time,b.commentabled,b.share_statement,b.appreciation, u.username,u.avatar,t.name
+        from t_blog b,t_user u, t_type t
+        where b.user_id = u.id and b.type_id = t.id and b.id = #{id}
+    </select>
+
+
+
+    <select id="getSearchBlog1"  parameterType="Blog" resultMap="blog">
+        <bind name="pattern" value="'%' + title + '%'" />
+        select b.id,b.title,b.create_time,b.recommend,b.type_id,b.published,t.id,t.name from t_blog b, t_type t
+        <where>
+            <if test="1 == 1">
+                b.type_id = t.id
+            </if>
+            <if test="typeId != null">
+                and b.type_id = #{typeId}
+            </if>
+            <if test="title != null">
+                and b.title like #{pattern}
+            </if>
+        </where>
+    </select>
+
+    <select id="getSearchBlog"  resultType="Blog" resultMap="firstPageBlog">
+        <bind name="pattern" value="'%'+query+'%'"/>
+        select b.id,b.title,b.first_picture, b.views,b.comment_count,b.create_time,b.description,
+        t.name ,
+        u.username, u.avatar
+        from t_blog b, t_type t,t_user u
+        where b.type_id = t.id and  u.id = b.user_id and (b.title like #{pattern} or b.content like  #{pattern})
+        order by b.create_time desc
+    </select>
+
+    <select id="getCommentCountById" resultType="int">
+        select count(*) from t_comment c
+        where c.blog_id=#{id};
+    </select>
+    <update id="updateViews">
+        update t_blog b set b.views = b.views+1 where b.id = #{id}
+    </update>
+
+    <select id="getByTypeId" resultMap="firstPageBlog">
+        select b.id,b.title,b.first_picture, b.views,b.comment_count,b.create_time,b.description,
+               t.name ,
+               u.username, u.avatar
+        from t_blog b, t_type t,t_user u
+        where b.type_id = t.id and  u.id = b.user_id and b.type_id=#{typeId} order by create_time desc
+
+    </select>
+    <!--统计博客信息-->
+    <select id="getBlogTotal" resultType="Integer">
+        select count(*) from t_blog
+    </select>
+    <select id="getBlogViewTotal" resultType="Integer">
+        select sum(views) from t_blog
+    </select>
+    <select id="getBlogCommentTotal" resultType="Integer">
+        select count(*) from t_comment
+    </select>
+    <select id="getBlogMessageTotal" resultType="Integer">
+        select count(*) from t_message
+    </select>
+
+
+
+</mapper>

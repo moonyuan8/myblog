@@ -1,0 +1,27 @@
+#生产环境
+
+server:
+  port: 8888
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/my_blog_test?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+  messages:
+    basename: i18n/messages
+  thymeleaf:
+    cache: true
+  redis:
+    database: #redis数据库
+    password: #redis密码
+    port: #端口号
+    host: #redis服务器地址
+
+logging:
+  level:
+    root: info
+    com.sjy: debug
+  file:
+    name: log/dev/blog.log

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>500</title>
+  <link href="../static/images/favicon.ico" th:href="@{/images/me.jpg}" rel="icon" type="image/x-ico">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+  <link rel="stylesheet" href="../static/css/me.css" th:href="@{/css/me.css}">
+  <link rel="stylesheet" href="https://csshake.surge.sh/csshake.min.css">
+</head>
+<body>
+<!--导航-->
+<nav class="gird-header">
+  <div class="ui container">
+    <div class="ui inverted secondary stackable menu">
+      <h2 class="ui olive header item" style="font-family: STSong;color: #1d75b3">Yuan</h2>
+      <!--<div class="right m-item item m-mobile-hide">-->
+      <a href="#" th:href="@{/}" class="m-item item m-mobile-hide shake-vertical"><i class="home icon"></i>首页</a>
+      <a href="#" th:href="@{/types/-1}" class="m-item item m-mobile-hide shake-vertical"><i class="clone outline icon"></i>博客</a>
+      <a href="#" th:href="@{/message}" class="m-item item m-mobile-hide shake-vertical"><i class="book icon"></i>留言板</a>
+      <a href="#" th:href="@{/friends}" class="m-item item m-mobile-hide shake-vertical"><i class="paper plane icon"></i>友链</a>
+      <a href="#" th:href="@{/picture}" class="m-item item m-mobile-hide shake-vertical"><i class="image icon"></i>照片墙</a>
+      <a href="#" th:href="@{/archives}" class="m-item item m-mobile-hide shake-vertical"><i class="clock icon"></i>时间轴</a>
+      <a href="#" th:href="@{/microblog}" class="m-item item m-mobile-hide shake-vertical"><i class="hourglass outline icon"></i>日记</a>
+      <a href="#" th:href="@{/about}" class="m-item item m-mobile-hide shake-vertical"><i class="info icon"></i>关于我</a>
+      <!--</div>-->
+      <div class="right m-item item m-mobile-hide">
+        <form name="search" action="#" th:action="@{/search}" method="post" target="_blank">
+          <div class="ui icon transparent input m-margin-tb-tiny" style="color: white">
+            <input style="color: white" type="text" name="query" placeholder="Search...." th:value="${query}">
+            <i onclick="document.forms['search'].submit()" class="search link icon"></i>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <a href="#" class="ui menu toggle black icon button m-right-top m-mobile-show">
+    <i class="sidebar icon"></i>
+  </a>
+</nav>
+
+
+
+<br>
+<br>
+<br>
+
+<div class="m-container-small m-padded-tb-massive">
+  <div class="ui error message m-padded-tb-huge" >
+    <div class="ui contianer">
+      <h2>500</h2>
+      <p>对不起，服务异常，请联系管理员</p>
+    </div>
+  </div>
+</div>
+<div class="m-margin-top-max" align="center">
+  <a href="#" th:href="@{/}">
+    <button type="button" class="ui teal button m-mobile-wide"><i class="home icon"></i>返回首页</button>
+  </a>
+</div>
+<br>
+<br>
+<br>
+<br>
+
+
+<!--底部栏-->
+<footer id="waypoint" class="ui inverted vertical segment m-padded-tb-massive m-opacity">
+  <div class="ui center aligned container">
+    <div class="ui inverted divided stackable grid">
+      <div class="four wide column" >
+        <div class="ui inverted link list">
+          <div class="item">
+            <!--微信二维码-->
+            <div style="font-size: large;font-weight: bold" class="ui inverted m-text-thin m-text-spaced " >QQ</div>
+            <img src="../static/images/QQ.png" th:src="@{/images/QQ.png}"  class="ui m-margin-top rounded image" alt="" style="width: 110px">
+          </div>
+        </div>
+      </div>
+
+      <div class="four wide column">
+        <div class="ui inverted link list">
+          <div class="item">
+            <!--微信二维码-->
+            <div style="font-size: large;font-weight: bold" class="ui inverted m-text-thin m-text-spaced " >微信</div>
+            <img src="../static/images/WECHAT.png" th:src="@{/images/WECHAT.png}"  class="ui m-margin-top rounded image" alt="" style="width: 110px">
+          </div>
+        </div>
+      </div>
+      <div class="four wide column">
+        <h4 class="ui inverted header m-text-thin m-text-spaced ">联系我</h4>
+        <div class="ui inverted link list">
+          <a href="#" class="item m-text-thin">Email：sunjyy825@qq.com</a>
+          <a rel="nofollow" href="https://mail.qq.com/" target="_blank" style="color: #1d75b3;size: 30px">点击这儿给他发送邮件</a>
+        </div>
+      </div>
+      <div class="four wide column">
+        <h4 class="inverted header m-text-thin m-text-spaced">我的博客已运营</h4>
+        <p id="htmer_time" class="item m-text-thin">
+      </div>
+    </div>
+
+    <div class="ui inverted section divider"></div>
+    <a rel="nofollow" href="https://beian.miit.gov.cn/" target="_blank">苏ICP备2021052612号-1</a>
+  </div>
+
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+
+<script>
+    $('#newblog-container').load(/*[[@{/footer/newblog}]]*/"/footer/newblog");
+
+    // 运行时间统计
+    function secondToDate(second) {
+        if (!second) {
+            return 0;
+        }
+        var time = new Array(0, 0, 0, 0, 0);
+        if (second >= 365 * 24 * 3600) {
+            time[0] = parseInt(second / (365 * 24 * 3600));
+            second %= 365 * 24 * 3600;
+        }
+        if (second >= 24 * 3600) {
+            time[1] = parseInt(second / (24 * 3600));
+            second %= 24 * 3600;
+        }
+        if (second >= 3600) {
+            time[2] = parseInt(second / 3600);
+            second %= 3600;
+        }
+        if (second >= 60) {
+            time[3] = parseInt(second / 60);
+            second %= 60;
+        }
+        if (second > 0) {
+            time[4] = second;
+        }
+        return time;
+    }
+    function setTime() {
+        /*此处为网站的创建时间*/
+        var create_time = Math.round(new Date(Date.UTC(2021, 10, 18, 8, 8, 8)).getTime() / 1000);
+        var timestamp = Math.round((new Date().getTime() + 8 * 60 * 60 * 1000) / 1000);
+        currentTime = secondToDate((timestamp - create_time));
+        currentTimeHtml = currentTime[0] + '年' + currentTime[1] + '天'
+            + currentTime[2] + '时' + currentTime[3] + '分' + currentTime[4]
+            + '秒';
+        document.getElementById("htmer_time").innerHTML = currentTimeHtml;
+    }
+    setInterval(setTime, 1000);
+</script>
+</body>
+</html>

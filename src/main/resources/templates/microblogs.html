@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yuan-日记</title>
+  <link href="../static/images/favicon.ico" th:href="@{/images/me.jpg}" rel="icon" type="image/x-ico">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+  <link rel="stylesheet" href="../static/css/me.css" th:href="@{/css/me.css}">
+  <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css" th:href="@{/yss/font-awesome/css/font-awesome.min.css}">
+  <link rel="stylesheet" href="layui/css/layui.css" th:href="@{/yss/layui/css/layui.css}"/>
+  <link rel="stylesheet" href="css/master.css" th:href="@{/yss/css/master.css}"/>
+  <link rel="stylesheet" href="css/gloable.css" th:href="@{/yss/css/gloable.css}" />
+  <link rel="stylesheet" href="css/nprogress.css" th:href="@{/yss/css/nprogress.css}"/>
+  <link rel="stylesheet" href="css/timeline.css" th:href="@{/yss/css/timeline.css}"/>
+  <link rel="stylesheet" href="https://csshake.surge.sh/csshake.min.css">
+</head>
+<body>
+
+  <!--导航-->
+  <nav class="gird-header">
+    <div class="ui container">
+      <div class="ui inverted secondary stackable menu">
+        <h2 class="ui olive header item" style="font-family: STSong;color: #1d75b3">Yuan</h2>
+        <!--<div class="right m-item item m-mobile-hide">-->
+          <a href="#" th:href="@{/}" class="m-item item m-mobile-hide shake-vertical"><i class="home icon"></i>首页</a>
+          <a href="#" th:href="@{/types/-1}" class="m-item item m-mobile-hide shake-vertical"><i class="clone outline icon"></i>博文</a>
+          <a href="#" th:href="@{/picture}" class="m-item item m-mobile-hide shake-vertical"><i class="image icon"></i>照片墙</a>
+          <a href="#" th:href="@{/friends}" class="m-item item m-mobile-hide shake-vertical"><i class="paper plane icon"></i>友链</a>
+          <a href="#" th:href="@{/archives}" class="m-item item m-mobile-hide shake-vertical"><i class="clock icon"></i>时间轴</a>
+          <a href="#" th:href="@{/message}" class="m-item item m-mobile-hide shake-vertical"><i class="book icon"></i>留言板</a>
+          <a href="#" th:href="@{/microblog}" class="active m-item item m-mobile-hide"><i class="hourglass outline icon"></i>日记</a>
+          <a href="#" th:href="@{/about}" class="m-item item m-mobile-hide shake-vertical"><i class="info icon"></i>关于我</a>
+        <!--</div>-->
+        <div class="right m-item item m-mobile-hide">
+          <form name="search" action="#" th:action="@{/search}" method="post" target="_blank">
+            <div class="ui icon transparent input m-margin-tb-tiny" style="color: white">
+              <input style="color: white" type="text" name="query" placeholder="Search...." th:value="${query}">
+              <i onclick="document.forms['search'].submit()" class="search link icon"></i>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <a href="#" class="ui menu toggle black icon button m-right-top m-mobile-show">
+      <i class="sidebar icon"></i>
+    </a>
+  </nav>
+
+  <div class="doc-container m-padded-tb-massivex m-opacity" id="doc-container">
+    <div class="container-fixed">
+      <div class="timeline-box shadow">
+        <div class="timeline-main">
+          <h1><i class="fa fa-clock-o"></i>日记</h1>
+          <div class="timeline-line"></div>
+<!--          <div class="timeline-year">-->
+            <h2><a class="yearToggle">2022 年</a><i class="fa fa-caret-down fa-fw"></i></h2>
+            <div class="timeline-month" th:each="blog : ${microblogs2022}" >
+              <ul>
+                <li>
+                  <div class="h4 animated fadeInLeft">
+                    <p class="date" th:text="${#dates.month(blog.createTime)}+'月'+${#dates.day(blog.createTime)}+'日'" >10月16日</p>
+                  </div>
+                  <p class="dot-circle animated "><i class="fa fa-dot-circle-o"></i></p>
+                  <div class="content animated fadeInRight" th:utext="${blog.content}">江湖路远，有缘再见。</div>
+                  <div class="clear"></div>
+                </li>
+              </ul>
+            </div>
+            <h2><a class="yearToggle">2021 年</a><i class="fa fa-caret-down fa-fw"></i></h2>
+            <div class="timeline-month" th:each="blog : ${microblogs2021}" >
+              <ul>
+                <li>
+                  <div class="h4 animated fadeInLeft">
+                    <p class="date" th:text="${#dates.month(blog.createTime)}+'月'+${#dates.day(blog.createTime)}+'日'" >10月16日</p>
+                  </div>
+                  <p class="dot-circle animated "><i class="fa fa-dot-circle-o"></i></p>
+                  <div class="content animated fadeInRight" th:utext="${blog.content}">江湖路远，有缘再见。</div>
+                  <div class="clear"></div>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <h1 style="padding-top:4px;padding-bottom:2px;margin-top:40px;"><i class="fa fa-hourglass-end"></i>THE END</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!--置顶图标-->
+  <div id="toolbar" class="m-padded-tb-large m-fixed m-right-bottom">
+    <a href="#" class="ui teal icon button"><i class="chevron up icon"></i> </a>
+  </div>
+
+  <!--底部栏-->
+  <footer class="ui inverted vertical segment m-padded-tb-massive m-opacity">
+    <!--容器-->
+    <div class="ui center aligned container">
+      <div class="ui inverted divided stackable grid">
+        <div class="four wide column">
+          <div style="font-size: large;font-weight: bold" class="ui inverted m-text-thin m-text-spaced m-margin-top-max" >联系我</div>
+          <!--<div id="newblog-container">-->
+          <!--<div class="ui inverted link list" th:fragment="newblogList">-->
+          <!--<a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="item m-text-thin" th:each="blog : ${newblogs}" th:text="${blog.title}">最新文章</a>-->
+          <!--</div>-->
+          <!--</div>-->
+          <div class="ui inverted link list">
+            <div href="#" class="m-text-thin">Email：sunjyy825@qq.com</div>
+            <a rel="nofollow" href="https://mail.qq.com/" target="_blank" style="color: #1d75b3;size: 30px">点击这儿给他发送邮件</a>
+          </div>
+        </div>
+
+        <div class="four wide column" >
+          <div class="ui inverted link list">
+            <div class="item">
+              <!--微信二维码-->
+              <div style="font-size: large;font-weight: bold" class="ui inverted m-text-thin m-text-spaced " >QQ</div>
+              <img src="../static/images/QQ.png" th:src="@{/images/QQ.png}"  class="ui m-margin-top rounded image" alt="" style="width: 110px">
+            </div>
+          </div>
+        </div>
+
+        <div class="four wide column">
+          <div class="ui inverted link list">
+            <div class="item">
+              <!--微信二维码-->
+              <div style="font-size: large;font-weight: bold" class="ui inverted m-text-thin m-text-spaced " >微信</div>
+              <img src="../static/images/WECHAT.png" th:src="@{/images/WECHAT.png}"  class="ui m-margin-top rounded image" alt="" style="width: 110px">
+            </div>
+          </div>
+        </div>
+        <!--博客运行时间统计-->
+        <div class="four wide column">
+          <div style="font-size: large;font-weight: bold" class="ui inverted  m-text-thin m-text-spaced m-margin-top">博客信息</div>
+          <!--<p id="htmer_time" class="item m-text-thin"></p>-->
+          <div id="blog-message">
+            <div class="ui inverted link list" style="align-content: center;margin-top: 10px" th:fragment="blogMessage">
+              <div class="m-text-thin" style="text-align: left;margin-left: 75px;">
+                文章总数： <h2 class="ui orange header m-inline-block m-margin-top-null" style="font-size:medium;" th:text="${blogTotal}"> 14 </h2> 篇
+              </div>
+              <div class="m-text-thin" style="text-align: left;margin-left: 75px">
+                访问总数： <h2 class="ui orange header m-inline-block m-margin-top-null" style="font-size:medium;" th:text="${blogViewTotal}"> 14 </h2> 次
+              </div>
+              <div class="m-text-thin" style="text-align: left;margin-left: 75px">
+                评论总数： <h2 class="ui orange header m-inline-block m-margin-top-null" style="font-size:medium;" th:text="${blogCommentTotal}"> 14 </h2> 条
+              </div>
+              <div class="m-text-thin" style="text-align: left;margin-left: 75px">
+                留言总数： <h2 class="ui orange header m-inline-block m-margin-top-null" style="font-size:medium;" th:text="${blogMessageTotal}"> 14 </h2> 条
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="ui inverted section divider"></div>
+      <div style="color: #F08047;margin-top: -18px" class="ui inverted m-text-thin m-text-spaced">我的博客已运营：<span id="htmer_time" class="item m-text-thin"></span> (*๓´╰╯`๓)</div>
+      <a rel="nofollow" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=32010602010999" target="_blank" style="color: #1d75b3;size: 30px">苏ICP备2021052612号-1    |   </a>
+      <img src="../static/images/beian.png" width="20px" height="20px" th:src="@{/images/beian.png}" alt=""><a rel="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=32010602010999" target="_blank" style="color: #1d75b3;size: 30px">苏公网安备 32010602010999号</a>    </div>
+    </div>
+
+  </footer>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+  <script src="../static/lib/waypoints/jquery.waypoints.min.js" th:src="@{/lib/waypoints/jquery.waypoints.min.js}"></script>
+  <script src="layui/layui.js" th:href="@{/yss/layui/layui.js}"></script>
+  <script src="js/yss/gloable.js" th:href="@{/yss/js/yss/gloable.js}"></script>
+  <script src="js/plugins/nprogress.js" th:href="@{/yss/js/plugins/nprogress.js}"></script>
+  <script>NProgress.start();</script>
+  <script src="js/pagediary.js" th:href="@{/yss/js/pagediary.js}"></script>
+  <script>
+    window.onload = function () {
+      NProgress.done();
+    };
+  </script>
+
+
+
+  <script>
+    $('#blog-message').load(/*[[@{/footer/blogmessage}]]*/"/footer/blogmessage");
+
+    $('.menu.toggle').click(function () {
+      $('.m-item').toggleClass('m-mobile-hide');
+    });
+
+      // 运行时间统计
+      function secondToDate(second) {
+          if (!second) {
+              return 0;
+          }
+          var time = new Array(0, 0, 0, 0, 0);
+          if (second >= 365 * 24 * 3600) {
+              time[0] = parseInt(second / (365 * 24 * 3600));
+              second %= 365 * 24 * 3600;
+          }
+          if (second >= 24 * 3600) {
+              time[1] = parseInt(second / (24 * 3600));
+              second %= 24 * 3600;
+          }
+          if (second >= 3600) {
+              time[2] = parseInt(second / 3600);
+              second %= 3600;
+          }
+          if (second >= 60) {
+              time[3] = parseInt(second / 60);
+              second %= 60;
+          }
+          if (second > 0) {
+              time[4] = second;
+          }
+          return time;
+      }
+      function setTime() {
+          /*此处为网站的创建时间*/
+          var create_time = Math.round(new Date(Date.UTC(2021, 10, 18, 8, 8, 8)).getTime() / 1000);
+          var timestamp = Math.round((new Date().getTime() + 8 * 60 * 60 * 1000) / 1000);
+          currentTime = secondToDate((timestamp - create_time));
+          currentTimeHtml = currentTime[0] + '年' + currentTime[1] + '天'
+              + currentTime[2] + '时' + currentTime[3] + '分' + currentTime[4]
+              + '秒';
+          document.getElementById("htmer_time").innerHTML = currentTimeHtml;
+      }
+      setInterval(setTime, 1000);
+
+
+  </script>
+</body>
+</html>

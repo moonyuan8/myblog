@@ -1,0 +1,12 @@
+spring:
+  profiles:
+    active: pro
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.sjy.entity
+  configuration:
+    map-underscore-to-camel-case: true
+
+comment.avatar: /images/avatar.jpeg
+message.avatar: /images/avatar.jpeg

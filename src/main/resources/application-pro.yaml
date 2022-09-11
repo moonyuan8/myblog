@@ -1,0 +1,33 @@
+#生产环境
+server:
+  port: 8888
+  servlet:
+    session:
+      timeout: -1
+spring:
+  devtools:
+    restart:
+      enabled: true  #设置开启热部署
+      additional-paths: src/main/java #重启目录
+      exclude: WEB-INF/**
+
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/my_blog_test?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+  messages:
+    basename: i18n/messages
+  thymeleaf:
+    cache: false
+  redis:
+    database: #redis数据库
+    password: #redis密码
+    port: #端口号
+    host: #redis服务器地址
+logging:
+  level:
+    root: info
+    com.sjy: debug
+  file:
+    name: log/dev/blog.log

@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yuan-关于我</title>
+    <link href="../static/images/favicon.ico" th:href="@{/images/me.jpg}" rel="icon" type="image/x-ico">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+    <link rel="stylesheet" href="../static/css/me.css" th:href="@{/css/me.css}">
+<!--    <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" th:href="@{/yss//font-awesome/css/font-awesome.min.css}">-->
+    <link rel="stylesheet" href="/layui/css/layui.css" th:href="@{/yss/layui/css/layui.css}"/>
+    <link rel="stylesheet" href="../static/yss/css/about.css" th:href="@{/yss/css/about.css}"/>
+    <link rel="stylesheet" href="/layui/css/layui.css" th:href="@{/yss/css/master.css}"/>
+    <link rel="stylesheet" href="https://csshake.surge.sh/csshake.min.css">
+</head>
+<body>
+
+<!--导航-->
+<nav class="gird-header">
+    <div class="ui container">
+        <div class="ui inverted secondary stackable menu">
+            <h2 class="ui olive header item" style="font-family: STSong;color: #1d75b3">Yuan</h2>
+            <!--<div class="right m-item item m-mobile-hide">-->
+                <a href="#" th:href="@{/}" class="m-item item m-mobile-hide shake-vertical"><i class="home icon"></i>首页</a>
+                <a href="#" th:href="@{/types/-1}" class="m-item item m-mobile-hide shake-vertical"><i class="clone outline icon"></i>博客</a>
+                <a href="#" th:href="@{/picture}" class="m-item item m-mobile-hide shake-vertical"><i class="image icon"></i>照片墙</a>
+                <a href="#" th:href="@{/friends}" class="m-item item m-mobile-hide shake-vertical"><i class="paper plane icon"></i>友链</a>
+                <a href="#" th:href="@{/archives}" class="m-item item m-mobile-hide shake-vertical"><i class="clock icon"></i>时间轴</a>
+                <a href="#" th:href="@{/message}" class="m-item item m-mobile-hide shake-vertical"><i class="book icon"></i>留言板</a>
+                <a href="#" th:href="@{/microblog}" class="m-item item m-mobile-hide shake-vertical"><i class="hourglass outline icon"></i>日记</a>
+                <a href="#" th:href="@{/about}" class="active m-item item m-mobile-hide"><i class="info icon"></i>关于我</a>
+            <!--</div>-->
+            <div class="right m-item item m-mobile-hide">
+                <form name="search" action="#" th:action="@{/search}" method="post" target="_blank">
+                    <div class="ui icon transparent input m-margin-tb-tiny" style="color: white">
+                        <input style="color: white" type="text" name="query" placeholder="Search...." th:value="${query}">
+                        <i onclick="document.forms['search'].submit()" class="search link icon"></i>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <a href="#" class="ui menu toggle black icon button m-right-top m-mobile-show">
+        <i class="sidebar icon"></i>
+    </a>
+</nav>
+
+
+<!--顶部背景图片-->
+<!--<div class="m-bg-type_outer" style="width: 100%;height: 40%">-->
+<!--    <img src="../static/images/aboutbg.jpg" th:src="@{https://youpai.moonyuan.top/back/aboutbg.jpg}" alt="" class="ui m-bg image" style="width: 100%;height: 100%">-->
+<!--    <div class="m-bg-class_cover">-->
+<!--        <div class="ui container" style="position: relative ;bottom: -540px;">-->
+<!--            <div class="m-font-size-title" align="center" style="font-family:'STXingkai'">关于我</div>-->
+<!--            <div class="m-font-size-text-init-title m-margin-top" align="center">头一次活这么久，记得善待自己</div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<br>
+<br>
+<br>
+<br>
+<!--<link rel="stylesheet" href="../static/yss/css/about.css" th:href="@{/yss/css/about.css}"/>-->
+<div class="container-fixed">
+    <div class="container-inner">
+        <article>
+            <section>
+                <h1 >关于我</h1>
+                <p>
+                    中科大软件学院研二在读，找实习中~<br>
+                    语雀同步更新 ：<a href=https://www.yuque.com/moonyuan/top>语雀链接</a>
+                    本网站源码:
+                    Gitee:
+                    Github:
+                </p>
+
+                <span>
+                    如果您对本网站或者内推有任何问题或者可以内推我，可以通过以下方式联系到我：
+                </span>
+                <ul>
+                    <li>邮 箱 ：<a href="mailto:895474507@qq.com">895474507@qq.com</a></li>
+                    <li>微 信 ：15370067207</li>
+                </ul>
+
+            </section>
+            <section>
+                <h1>关于本站</h1>
+                <p>
+                    本站建于2021年11月，主要是个人爱好写着玩，记录日常生活、学习的技术、科软课程等。<br>
+                    由于最近开始又开始找实习了，比较忙，更新会少一些吧~
+                </p>
+                <span>
+                    本站结构：
+                </span>
+                <ul>
+                    <li>前 端 ：<code>Semantic Ui(主要) + Layui</code></li>
+                    <li>后 端 ：<code>SpringBoot + MYSQL + Redis + Thymeleaf</code></li>
+                </ul>
+                <p>
+                    本站采用阿里云服务器ECS和又拍云CDN。
+                </p>
+            </section>
+            <section>
+                <h1>关于版权</h1>
+                <p>
+                    只要在使用时注明出处，那么您可以可以对本站所有原创内容进行转载、节选、二次创作，但是您不得对其用于商业目的。
+                </p>
+            </section>
+            <section>
+                <h1>特别说明</h1>
+                <ul>
+                    <li>最好使用电脑端浏览，本站前端开发基本没有考虑对手机端的兼容。</li>
+                    <li>本站所有文章仅代表个人观点，与任何组织或个人无关，仅代表我个人的评价。</li>
+                    <li>您关注的邮箱仅作通知使用，不对外使用。</li>
+                </ul>
+                <br ><br >
+            </section>
+        </article>
+    </div>
+</div>
+
+
+  <br>
+  <br>
+
+  <!--底部栏-->
+<footer class="ui inverted vertical segment m-padded-tb-massive m-opacity">
+    <!--容器-->
+    <div class="ui center aligned container">
+        <div class="ui inverted divided stackable grid">
+            <div class="four wide column">
+                <div style="font-size: large;font-weight: bold" class="ui inverted m-text-thin m-text-spaced m-margin-top-max" >联系我</div>
+                <!--<div id="newblog-container">-->
+                <!--<div class="ui inverted link list" th:fragment="newblogList">-->
+                <!--<a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="item m-text-thin" th:each="blog : ${newblogs}" th:text="${blog.title}">最新文章</a>-->
+                <!--</div>-->
+                <!--</div>-->
+                <div class="ui inverted link list">
+                    <div href="#" class="m-text-thin">Email：sunjyy825@qq.com</div>
+                    <a rel="nofollow" href="https://mail.qq.com/" target="_blank" style="color: #1d75b3;size: 30px">点击这儿给他发送邮件</a>
+                </div>
+            </div>
+
+            <div class="four wide column" >
+                <div class="ui inverted link list">
+                    <div class="item">
+                        <!--微信二维码-->
+                        <div style="font-size: large;font-weight: bold" class="ui inverted m-text-thin m-text-spaced " >QQ</div>
+                        <img src="../static/images/QQ.png" th:src="@{/images/QQ.png}"  class="ui m-margin-top rounded image" alt="" style="width: 110px">
+                    </div>
+                </div>
+            </div>
+
+            <div class="four wide column">
+                <div class="ui inverted link list">
+                    <div class="item">
+                        <!--微信二维码-->
+                        <div style="font-size: large;font-weight: bold" class="ui inverted m-text-thin m-text-spaced " >微信</div>
+                        <img src="../static/images/WECHAT.png" th:src="@{/images/WECHAT.png}"  class="ui m-margin-top rounded image" alt="" style="width: 110px">
+                    </div>
+                </div>
+            </div>
+            <!--博客运行时间统计-->
+            <div class="four wide column">
+                <div style="font-size: large;font-weight: bold" class="ui inverted  m-text-thin m-text-spaced m-margin-top">博客信息</div>
+                <div id="blog-message">
+                    <div class="ui inverted link list" style="align-content: center;margin-top: 10px" th:fragment="blogMessage">
+                        <div class="m-text-thin" style="text-align: left;margin-left: 75px;">
+                            文章总数： <h2 class="ui orange header m-inline-block m-margin-top-null" style="font-size:medium;" th:text="${blogTotal}"> 14 </h2> 篇
+                        </div>
+                        <div class="m-text-thin" style="text-align: left;margin-left: 75px">
+                            访问总数： <h2 class="ui orange header m-inline-block m-margin-top-null" style="font-size:medium;" th:text="${blogViewTotal}"> 14 </h2> 次
+                        </div>
+                        <div class="m-text-thin" style="text-align: left;margin-left: 75px">
+                            评论总数： <h2 class="ui orange header m-inline-block m-margin-top-null" style="font-size:medium;" th:text="${blogCommentTotal}"> 14 </h2> 条
+                        </div>
+                        <div class="m-text-thin" style="text-align: left;margin-left: 75px">
+                            留言总数： <h2 class="ui orange header m-inline-block m-margin-top-null" style="font-size:medium;" th:text="${blogMessageTotal}"> 14 </h2> 条
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ui inverted section divider"></div>
+        <div style="color: #F08047;margin-top: -18px" class="ui inverted m-text-thin m-text-spaced">我的博客已运行：<span id="htmer_time" class="item m-text-thin"></span> (*๓´╰╯`๓)</div>
+        <a rel="nofollow" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=32010602010999" target="_blank" style="color: #1d75b3;size: 30px">苏ICP备2021052612号-1    |   </a>
+        <img src="../static/images/beian.png" width="20px" height="20px" th:src="@{/images/beian.png}" alt=""><a rel="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=32010602010999" target="_blank" style="color: #1d75b3;size: 30px">苏公网安备 32010602010999号</a>
+    </div>
+</footer>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+
+  <script>
+      // $('#newblog-container').load(/*[[@{/footer/newblog}]]*/"/footer/newblog");
+
+      $('#blog-message').load("/footer/blogmessage");
+
+
+    $('.menu.toggle').click(function () {
+      $('.m-item').toggleClass('m-mobile-hide');
+    });
+
+    // 显示公众号
+    // $('.tencent').popup({
+    //     popup : $('.tencent-qr'),
+    //     position: 'bottom center'
+    // });
+
+    // 显示微信
+    $('.wechat').popup({
+        popup : $('.wechat-qr'),
+        position: 'bottom center'
+    });
+
+    // 显示QQ
+    $('.qq').popup({
+        popup : $('.qq-qr'),
+        position: 'bottom center'
+    });
+
+    // 显示邮箱
+    $('.email').popup();
+
+    // 显示CSDN
+    $('.weibo').popup();
+
+      // 显示git
+      $('.git').popup();
+
+
+
+
+    // 运行时间统计
+    function secondToDate(second) {
+        if (!second) {
+            return 0;
+        }
+        var time = new Array(0, 0, 0, 0, 0);
+        if (second >= 365 * 24 * 3600) {
+            time[0] = parseInt(second / (365 * 24 * 3600));
+            second %= 365 * 24 * 3600;
+        }
+        if (second >= 24 * 3600) {
+            time[1] = parseInt(second / (24 * 3600));
+            second %= 24 * 3600;
+        }
+        if (second >= 3600) {
+            time[2] = parseInt(second / 3600);
+            second %= 3600;
+        }
+        if (second >= 60) {
+            time[3] = parseInt(second / 60);
+            second %= 60;
+        }
+        if (second > 0) {
+            time[4] = second;
+        }
+        return time;
+    }
+    function setTime() {
+        /*此处为网站的创建时间*/
+        var create_time = Math.round(new Date(Date.UTC(2021, 10, 18, 8, 8, 8)).getTime() / 1000);
+        var timestamp = Math.round((new Date().getTime() + 8 * 60 * 60 * 1000) / 1000);
+        currentTime = secondToDate((timestamp - create_time));
+        currentTimeHtml = currentTime[0] + '年' + currentTime[1] + '天'
+            + currentTime[2] + '时' + currentTime[3] + '分' + currentTime[4]
+            + '秒';
+        document.getElementById("htmer_time").innerHTML = currentTimeHtml;
+    }
+    setInterval(setTime, 1000);
+
+
+  </script>
+</div>
+</body>
+</html>
